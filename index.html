@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DimeX Staking Dashboard</title>
-    <script type="module">
-        import { createAppKit } from 'https://esm.sh/@reown/appkit'
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DimeX Staking Dashboard</title>
+
+<script type="module">
+
+import { createAppKit } from 'https://esm.sh/@reown/appkit'
 import { Ethers5Adapter } from 'https://esm.sh/@reown/appkit-adapter-ethers5'
 import { bsc } from 'https://esm.sh/@reown/appkit/networks'
 import { ethers } from 'https://esm.sh/ethers@5.7.2'
@@ -62,53 +64,58 @@ modal.subscribe(async (state) => {
 
   // Load
   if(typeof loadData === "function"){  
-      setTimeout(async () => {  
-        await loadData();  
-  
-        if(typeof loadLivePrice === "function"){  
-          await loadLivePrice();  
-        }  
-  
-        if(typeof loadRates === "function"){  
-          await loadRates();  
-        }  
-  
-        // 🔄 Auto refresh every 30 sec  
-        setInterval(() => {  
-          if(userAddress){  
-            loadData();  
-            loadLivePrice();  
-          }  
-        }, 30000);  
-  
-      }, 800);  
-  
-    }  
-</script> 
 
-    <style>
-        .connect-btn {
-            background-color: #f1b80d;
-            color: black;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 10px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-    </style>
+    setTimeout(async () => {  
+
+      await loadData()
+
+      if(typeof loadLivePrice === "function"){  
+        await loadLivePrice()  
+      }
+
+      if(typeof loadRates === "function"){  
+        await loadRates()  
+      }
+
+      setInterval(() => {  
+        if(userAddress){  
+          loadData()  
+          loadLivePrice()  
+        }  
+      }, 30000)
+
+    }, 800)
+
+  }
+
+})
+
+</script>
+
+<style>
+.connect-btn {
+  background-color: #f1b80d;
+  color: black;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+</style>
+
 </head>
+
 <body>
 
-    <nav style="display: flex; justify-content: space-between; padding: 20px;">
-        <h1>DimeX</h1>
-        <button class="connect-btn" onclick="openConnectModal()">Connect Wallet</button>
-    </nav>
+<nav style="display:flex;justify-content:space-between;padding:20px;">
+  <h1>DimeX</h1>
+  <button class="connect-btn" onclick="openConnectModal()">Connect Wallet</button>
+</nav>
 
-    <div style="text-align: center; margin-top: 50px;">
-        <appkit-button></appkit-button>
-    </div>
+<div style="text-align:center;margin-top:50px;">
+  <appkit-button></appkit-button>
+</div>
 
 </body>
 </html>
-
